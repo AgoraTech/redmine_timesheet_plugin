@@ -1,5 +1,5 @@
 pl:
-  timesheet_title: Czas Pracy
+  timesheet_title: Akceptacja czasu pracy
   timesheet_date_from_label: Od
   timesheet_date_to_label: Do
   timesheet_project_label: Projekt
@@ -8,3 +8,10 @@ pl:
   timesheet_showing_users: 'czas pracy użytkownika: '
   timesheet_permalink: '(Permalink do tego czasu pracy)'
   timesheet_group_by: Grupuj
+  label_show_project_status: "Projekty ze statusem:"
+  text_active_projects: "Aktywny"
+  text_all_projects: "Wszystkie (Akywne i zarchiwizowane)"
+  label_user_status: "Pokaż użytkowników ze statusem"
+  text_active_users: "Tylko aktywni"
+  text_all_users: "Wszyscy"
+  timesheet_groups_label: Grupy
