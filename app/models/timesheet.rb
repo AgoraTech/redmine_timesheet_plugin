@@ -193,14 +193,17 @@ class Timesheet
       user.allowed_to?(:log_time, nil, :global => true)
     }
 
-    user_scope = findUsersByCurrentManager(user_scope)
+    if !User.current.admin?
+      user_scope = findUsersByCurrentManager(user_scope)
+    end
+    return user_scope
   end
 
   def self.findUsersByCurrentManager (user_scope)
     mpkId = nil
     canAcceptId = nil
     User.current.available_custom_fields.each do |userCustomField|
-      if(userCustomField.name == 'mpk')
+      if(userCustomField.name == 'MPK')
           mpkId = userCustomField.id
       end
       if(userCustomField.name == 'canAccept')
