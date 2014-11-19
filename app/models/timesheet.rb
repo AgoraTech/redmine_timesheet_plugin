@@ -203,10 +203,10 @@ class Timesheet
     mpkId = nil
     canAcceptId = nil
     User.current.available_custom_fields.each do |userCustomField|
-      if(userCustomField.name == 'MPK')
+      if(userCustomField.name == 'MPK to Reports')
           mpkId = userCustomField.id
       end
-      if(userCustomField.name == 'canAccept')
+      if(userCustomField.name == 'Can Accept MPK')
           canAcceptId = userCustomField.id
       end
     end
