@@ -3,15 +3,15 @@
     <fieldset>
       <div>
         <div class="radiobutton-label">
-          <%= radio_button_tag 'timesheet[period_type]', '1', true %>
+          <%= radio_button_tag 'timesheet[period_type]', '1', (params[:timesheet].nil? ? true : (@timesheet.period_type == Timesheet::ValidPeriodType[:default])) %>
           <label for="timesheet_period_type_1"><%= l(:timesheet_date_range_label)%></label>
         </div>
-        <%= select_tag 'timesheet[period]', options_for_period_select('last_month'),
+        <%= select_tag 'timesheet[period]', options_for_period_select((params[:timesheet].nil? ? 'last_month' : params[:timesheet][:period])),
           :id => 'select_timesheet_period_type_1', :onfocus => '$("timesheet_period_type_1").checked = true;'%>
       </div>
       <div>
         <div class="radiobutton-label">
-          <%= radio_button_tag 'timesheet[period_type]', '2', false %>
+          <%= radio_button_tag 'timesheet[period_type]', '2', (params[:timesheet].nil? ? false : (@timesheet.period_type == Timesheet::ValidPeriodType[:free_period])) %>
           <label for="timesheet_date_from"><%= l(:timesheet_date_from_label)%></label>
         </div>
         <span id="select_timesheet_period_type_2" onclick="$('#timesheet_period_type_2').checked = true;">
@@ -23,7 +23,7 @@
       
       <div class="group-by">
         <label for="timesheet_sort"><%= l(:timesheet_group_by) %></label>
-        <%= select_tag("timesheet[sort]", options_for_select(Timesheet::ValidSortOptions.invert, 'user')) %>
+        <%= select_tag("timesheet[sort]", options_for_select(Timesheet::ValidSortOptions.invert, (params[:timesheet].nil? ? 'user' : params[:timesheet][:sort]))) %>
       </div>
       
       <div class="timesheet-projects">
