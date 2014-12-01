@@ -234,6 +234,26 @@ class Timesheet
     return usersFiltered
   end
 
+  def self.currentUserCanAcceptReport
+    canAcceptId = nil
+    User.current.available_custom_fields.each do |userCustomField|
+      if(userCustomField.name == 'Can Accept MPK')
+          canAcceptId = userCustomField.id
+          break
+      end
+    end
+    
+    currentUserCanAcceptValue = []
+
+    User.current.custom_values.each do |customValue|
+      if(customValue.custom_field_id == canAcceptId)
+          if (customValue.value.downcase != 'none')
+            return true
+          end
+      end
+    end
+    return false
+  end
 
   protected
 
