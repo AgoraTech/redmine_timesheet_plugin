@@ -397,7 +397,8 @@ class Timesheet
         logs = time_entries_for_all_users(project)
         users = logs.collect(&:user).uniq.sort
       else
-        # Rest can see nothing
+        logs = time_entries_for_all_users(project)
+        users = logs.collect(&:user).uniq.sort
       end
 
       # Append the parent project name
@@ -426,8 +427,8 @@ class Timesheet
         logs = time_entries_for_all_users_in_group(group)
         users = logs.collect(&:user).uniq.sort
       else
-
-        #Rest can see nothing
+        logs = time_entries_for_all_users_in_group(group)
+        users = logs.collect(&:user).uniq.sort
       end
       unless logs.empty?
         self.time_entries[group.name] = { :logs => logs, :users => users }
@@ -449,7 +450,7 @@ class Timesheet
         # fetch the user timelogs for those projects
         logs = time_entries_for_user(user_id, :conditions => Project.allowed_to_condition(User.current, :see_project_timesheets))
       else
-        # Rest can see nothing
+        logs = time_entries_for_user(user_id)
       end
 
       unless logs.empty?
@@ -483,7 +484,7 @@ class Timesheet
           # Users with permission to see their time entries
           logs << issue_time_entries_for_current_user(issue)
         else
-          # Rest can see nothing
+          logs << issue_time_entries_for_current_user(issue)
         end
       end
 
